@@ -1,8 +1,10 @@
 import { NextPage } from "next"
 import Head from "next/head"
-import Header from "../components/Header/Header"
+import PostCard from "../components/Blog/PostCard/PostCard";
+import Header from "../components/shared/Header/Header"
+import { blog } from "../data/blog";
 
-const Home: NextPage = () => {
+const Blog: NextPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -12,19 +14,31 @@ const Home: NextPage = () => {
 
       <Header />
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-      </main>
+        <div>
+          <h1>Blog</h1>
+          <p>{blog.longDescription}</p>
 
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
+          {/*
+          // TODO: add search and filter by tags capability
+          <div>
+            <input />
+            <ol>
+              <li>Tag 1</li>
+              <li>Tag 2</li>
+            </ol>
+          </div>
+          */}
+
+          <h2>Posts</h2>
+          {blog.posts.length > 0 && (
+            blog.posts.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))
+          )}
+        </div>
+      </main>
     </div>
   )
 }
+
+export default Blog;
