@@ -1,8 +1,8 @@
 import React from "react";
-import { projects } from "../../data/config";
+import { projects } from "../../../data/config";
 import ProjectCard from "../ProjectCard/ProjectCard";
 
-const Projects: React.FC<{}> = () => {
+const ProjectsSection: React.FC<{}> = () => {
     if (projects.length === 0) {
         return null;
     } 
@@ -20,4 +20,4 @@ const Projects: React.FC<{}> = () => {
     );
 }
 
-export default Projects;
+export default ProjectsSection;

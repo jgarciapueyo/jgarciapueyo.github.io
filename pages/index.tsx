@@ -1,11 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
-import About from '../components/About/About';
-import BlogSection from '../components/BlogSection/BlogSection';
-import Experience from '../components/Experience/Experience';
-import Header from '../components/Header/Header';
-import Projects from '../components/Projects/Projects';
+import AboutSection from '../components/Home/AboutSection/AboutSection';
+import BlogSection from '../components/Home/BlogSection/BlogSection';
+import ExperienceSection from '../components/Home/ExperienceSection/ExperienceSection';
+import Header from '../components/shared/Header/Header';
+import ProjectsSection from '../components/Home/ProjectsSection/ProjectsSection';
 
 const Home: NextPage = () => {
   return (
@@ -17,9 +16,9 @@ const Home: NextPage = () => {
 
       <Header />
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <About />
-        <Experience />
-        <Projects />
+        <AboutSection />
+        <ExperienceSection />
+        <ProjectsSection />
         <BlogSection />
       </main>
     </div>

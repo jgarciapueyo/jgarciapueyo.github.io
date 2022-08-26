@@ -1,8 +1,8 @@
 import React from 'react';
-import { experience } from '../../data/config';
+import { experience } from '../../../data/config';
 import PositionCard from '../PositionCard/PositionCard';
 
-const Experience: React.FC<{}> = () => {
+const ExperienceSection: React.FC<{}> = () => {
     if (experience.length === 0) {
         return null;
     }
@@ -24,4 +24,4 @@ const Experience: React.FC<{}> = () => {
     )
 }
 
-export default Experience;
+export default ExperienceSection;

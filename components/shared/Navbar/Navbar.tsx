@@ -1,5 +1,5 @@
 import React from "react";
-import { about, experience, projects } from "../../data/config";
+import { about, experience, projects } from "../../../data/config";
 
 const Navbar: React.FC = () => {
     return (

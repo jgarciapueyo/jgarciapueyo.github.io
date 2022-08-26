@@ -1,4 +1,4 @@
-import { blog } from "../../data/blog"
+import { blog } from "../../../data/blog"
 import FeaturedPostCard from "../FeaturedPostCard/FeaturedPostCard";
 
 const BlogSection: React.FC<{}> = () => {
@@ -10,7 +10,7 @@ const BlogSection: React.FC<{}> = () => {
         <section>
             <h2>Blog</h2>
 
-            <p>{blog.shortExplanation}</p>
+            <p>{blog.shortDescription}</p>
             <div>
                 {blog.featuredPosts.map((featuredPost: any) => (
                     <FeaturedPostCard key={featuredPost.id} featuredPost={featuredPost} />

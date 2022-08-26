@@ -1,12 +1,12 @@
 import React from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { about } from "../../data/config";
+import { about } from "../../../data/config";
 
-const About: React.FC<{}> = () => {
+const AboutSection: React.FC<{}> = () => {
     const { name, role, description } = about;
 
     return (
-        <div>
+        <section>
             <h1>
                 Hi, I am <span>{name}</span>
             </h1>
@@ -31,8 +31,8 @@ const About: React.FC<{}> = () => {
                     <FaLinkedin />
                 </a>
             </div>
-        </div>
+        </section>
     );
 }
 
-export default About;
+export default AboutSection;
