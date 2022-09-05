@@ -1,3 +1,14 @@
 @tailwind base;
+
+@layer base {
+    * {
+        background-color: #f8f8f8;
+    }
+
+    section {
+        @apply my-8;
+    }
+}
+
 @tailwind components;
 @tailwind utilities;

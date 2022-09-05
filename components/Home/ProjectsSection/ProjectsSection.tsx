@@ -8,10 +8,10 @@ const ProjectsSection: React.FC<{}> = () => {
     } 
 
     return (
-        <section>
-            <h2>Projects</h2>
+        <section id="projects">
+            <h2 className="text-center font-bold text-xl text-bgText uppercase mb-2">Projects</h2>
 
-            <div>
+            <div className="my-0 mx-auto grid grid-cols-auto-fit gap-10">
                 {projects.map((project) => (
                     <ProjectCard key={project.name} project={project}/>
                 ))}

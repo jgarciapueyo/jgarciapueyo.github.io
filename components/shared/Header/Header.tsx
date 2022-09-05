@@ -3,7 +3,7 @@ import Navbar from "../Navbar/Navbar";
 
 const Header: React.FC<{}> = () => {
     return (
-        <header>
+        <header className="h-20 w-full flex items-center justify-end">
             <Navbar />
         </header>
     );
