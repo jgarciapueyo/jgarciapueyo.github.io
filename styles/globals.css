@@ -2,7 +2,7 @@
 
 @layer base {
     * {
-        background-color: #f8f8f8;
+      @apply bg-bg;
     }
 
     section {
@@ -12,3 +12,19 @@
 
 @tailwind components;
 @tailwind utilities;
+
+.theme-light {
+  --primary: #2978b5;
+  --primaryText: #000000;
+  --primaryShadow: #0000002b;
+  --bg: #fcfcfc;
+  --bgText: #424242; 
+}
+
+.theme-dark {
+  --primary: #6d7eb1;
+  --primaryText: #ffffff;
+  --primaryShadow: #0000002b;
+  --bg: #282e47;
+  --bgText: #cfcfef; 
+}

@@ -21,7 +21,7 @@ export const experience = [
     },
     {
         company: 'Maximiliana',
-        title: 'Software Engineer',
+        title: 'Junior Software Engineer',
         startDate: 'May, 2021',
         endDate: 'Present',
     }

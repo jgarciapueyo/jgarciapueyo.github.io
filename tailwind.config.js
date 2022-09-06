@@ -2,6 +2,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
+  darkMode: 'class',
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -9,10 +10,11 @@ module.exports = {
   theme: {
     colors: {
       transparent: 'transparent',
-      'primary': '#4667c8',
-      'primaryText': '#ffffff',
-      'bg': '#f6f6f6',
-      'bgText': '#424242',
+      'primary': 'var(--primary)',
+      'primaryText': 'var(--primaryText)',
+      'primaryShadow': 'var(--primaryShadow)',
+      'bg': 'var(--bg)',
+      'bgText': 'var(--bgText)',
     },
     fontFamily: {
       "sans": ["Poppins", ...defaultTheme.fontFamily.sans]

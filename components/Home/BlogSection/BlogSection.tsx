@@ -2,7 +2,6 @@ import Link from "next/link";
 import { IconContext } from "react-icons";
 import { blog } from "../../../data/blog"
 import FeaturedPostCard from "../FeaturedPostCard/FeaturedPostCard";
-import { BsArrowRightSquareFill } from "react-icons/bs";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
 const BlogSection: React.FC<{}> = () => {
@@ -19,16 +18,19 @@ const BlogSection: React.FC<{}> = () => {
             </p>
 
             <Link href="#">
-                <a className="text-bgText pb-0.5 transition duration-4000 ease-in border-b-4 border-transparent hover:border-primary hover:text-primary">
+                <a className="font-bold text-bgText pb-0.5 border-b-4 border-transparent hover:border-primary hover:text-primary">
                     read all posts
                     <IconContext.Provider value={{ className: "inline ml-2 text-xl sm:text-2xl" }}>
                         <AiOutlineArrowRight />
                     </IconContext.Provider>
                 </a>
             </Link>
-            {blog.featuredPosts.map((featuredPost: any) => (
-                <FeaturedPostCard key={featuredPost.id} featuredPost={featuredPost} />
-            ))}
+
+            <div className="my-5 mx-auto grid grid-cols-1 gap-10">
+                {blog.featuredPosts.map((featuredPost: any) => (
+                    <FeaturedPostCard key={featuredPost.id} featuredPost={featuredPost} />
+                ))}
+            </div>
         </section>
     );
 }

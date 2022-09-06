@@ -14,9 +14,9 @@ const ExperienceSection: React.FC<{}> = () => {
             <div>
                 <ol className='relative border-l-2 border-bgText'>
                     {experience.map((position) => (
-                        <li className='my-5 ml-4'>
+                        <li key={position.company.concat(position.title)} className='mt-5 mb-10 ml-4'>
                             <div className="absolute w-3 h-3 rounded-full -left-[0.400rem] bg-primary"></div>
-                            <PositionCard key={position.company.concat(position.title)} position={position} />
+                            <PositionCard  position={position} />
                         </li>
                     ))}
                 </ol>

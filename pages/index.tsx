@@ -5,8 +5,10 @@ import BlogSection from '../components/Home/BlogSection/BlogSection';
 import ExperienceSection from '../components/Home/ExperienceSection/ExperienceSection';
 import Header from '../components/shared/Header/Header';
 import ProjectsSection from '../components/Home/ProjectsSection/ProjectsSection';
+import { useAppContext } from '../components/shared/AppWrapper/AppWrapper';
 
 const Home: NextPage = () => {
+  
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>

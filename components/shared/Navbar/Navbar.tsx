@@ -1,12 +1,14 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { about, experience, projects } from "../../../data/config";
 import { MdBrightness2 } from "react-icons/md";
+import { IoMdSunny } from "react-icons/io";
+import { useAppContext } from "../AppWrapper/AppWrapper";
 
 const NavbarLink: React.FC<any> = ({href, children}: any) => {
     return (
         <Link href={href}>
-            <a className="text-bgText pb-0.5 transition duration-4000 ease-in border-b-4 border-transparent hover:border-primary hover:text-primary">
+            <a className="text-bgText pb-0.5 border-b-4 border-transparent hover:border-primary hover:text-primary">
                 {children}
             </a>
         </Link>
@@ -14,7 +16,7 @@ const NavbarLink: React.FC<any> = ({href, children}: any) => {
 }
 
 const Navbar: React.FC = () => {
-    const [isLightTheme, setLightTheme] = useState<boolean>(true);
+    const { theme, toggleTheme } = useAppContext();
 
     return (
         <nav className="flex items-center">
@@ -52,17 +54,13 @@ const Navbar: React.FC = () => {
             <button
                 type='button'
                 aria-label='toggle theme'
-                onClick={() => {
-                    if(isLightTheme) {
-                        document.documentElement.classList.remove('dark')
-                    } else {
-                        document.documentElement.classList.add('dark')
-                    }
-                    console.log(isLightTheme);
-                    setLightTheme(!isLightTheme);
-                }}
+                onClick={() => {toggleTheme(theme == "light" ? "dark" : "light")}}
             >
-                <MdBrightness2 />
+                {
+                    theme == "light" ?
+                        <MdBrightness2 className="text-primary text-xl sm:text-2xl" /> :
+                        <IoMdSunny className="text-primary text-xl sm:text-2xl"/>
+                }
             </button>
         </nav>
     );
