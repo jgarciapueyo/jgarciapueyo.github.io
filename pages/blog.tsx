@@ -9,7 +9,7 @@ const Blog: NextPage = () => {
   const { showNavList } = useAppContext();
   
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex flex-col items-center justify-center py-2">
       <Head>
         <title>Blog - Jorge Garcia</title>
         <link rel="icon" href="/favicon.ico" />
@@ -18,10 +18,10 @@ const Blog: NextPage = () => {
       <Header />
       <div className={`
         ${showNavList ? 'hidden' : 'flex'}
-        md:flex w-full flex-1 flex-col items-center justify-start px-10 md:px-20 text-center`}>
+        md:flex min-h-screen w-full flex-1 flex-col items-center justify-start px-10 md:px-20 text-center`}>
           <section>
             <h1 className="text-center text-primaryText font-bold text-4xl leading-snug mb-8">BLOG</h1>
-            <h5 className="text-center font-bold text-lg text-primary uppercase mb-4">{blog.claim}</h5>
+            <h2 className="text-center font-bold text-lg text-primary uppercase mb-4">{blog.claim}</h2>
             <p className="text-justify text-bgText mb-4 mx-auto">
                 {blog.longDescription}
             </p>
