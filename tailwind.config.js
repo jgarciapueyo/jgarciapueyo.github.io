@@ -24,7 +24,7 @@ module.exports = {
         textColor: ['hover']
       },
       gridTemplateColumns: {
-        'auto-fit': 'repeat(auto-fit, minmax(18rem, 1fr))',
+        'auto-fit': 'repeat(auto-fit, minmax(20rem, 1fr))',
       }
     },
   },

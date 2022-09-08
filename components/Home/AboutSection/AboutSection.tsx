@@ -4,7 +4,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { about } from "../../../data/config";
 
 const AboutSection: React.FC<{}> = () => {
-    const { name, role, description } = about;
+    const { name, role, description, social } = about;
 
     return (
         <section id="about">
@@ -19,21 +19,23 @@ const AboutSection: React.FC<{}> = () => {
             </p>
 
             <div className="mx-auto max-w-xs flex justify-evenly">
-                <a>
+                <a href="/2022_JorgeGarciaPueyo_CV_EN.pdf" target="_blank">
                     <span className="block py-2 px-4 font-semibold 
                                      border-2 text-primary border-primary
                                      hover:text-bg hover:bg-primary">
                         resume
                     </span>
                 </a>
-                <a className="flex font-semibold text-bgText pb-0.5 
+                <a href={social.github} target="_blank"
+                className="flex font-semibold text-bgText pb-0.5 
                               border-b-4 border-transparent 
                               hover:border-primary hover:text-primary">
                     <IconContext.Provider value={{className: "my-auto text-xl sm:text-2xl"}}>
                         <FaGithub />
                     </IconContext.Provider>
                 </a>
-                <a className="flex font-semibold text-bgText pb-0.5 
+                <a href={social.linkedin} target="_blank"
+                className="flex font-semibold text-bgText pb-0.5 
                               border-b-4 border-transparent 
                               hover:border-primary hover:text-primary">
                     <IconContext.Provider value={{className: "my-auto text-xl sm:text-2xl"}}>

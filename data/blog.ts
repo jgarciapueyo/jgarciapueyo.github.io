@@ -1,4 +1,14 @@
-const posts = [
+interface Post {
+    id: string;
+    title: string;
+    url: string;
+    date: string;
+    tags: string[];
+    abstract: string;
+}
+
+const posts: Post[] = [
+    /*
     {
         id: "post1",
         title: "Post 1",
@@ -7,20 +17,13 @@ const posts = [
         tags: ["web-development", "c++"],
         abstract: "This is the abstract of ...............",
     },
-    {
-        id: "post2",
-        title: "Post 2",
-        url: "https://medium.com",
-        date: "Aug 18",
-        tags: ["web-development", "c++"],
-        abstract: "This is the abstract of ..............."
-
-    }
+    */
 ];
 
 export const blog = {
-    shortDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    longDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+    claim: '"The best way to learn something is to teach it to someone"',
+    shortDescription: 'The purpose of this blog is to write and publicly share posts about technology, notes about interesting topics that learn or to start discussions and hear what other people think. I truly believe that exchanging ideas and experiences is the best way to improve, so any comment or feedback in the posts is welcome.',
+    longDescription: 'The purpose of this blog is to write and publicly share posts about technology, notes about interesting topics that learn or to start discussions and hear what other people think. I truly believe that exchanging ideas and experiences is the best way to improve, so any comment or feedback in the posts is welcome.',
     posts: posts,
     featuredPosts: posts,
 }

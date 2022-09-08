@@ -11,13 +11,15 @@ const BlogSection: React.FC<{}> = () => {
 
     return (
         <section id="blog">
-            <h2 className="text-center font-bold text-xl text-bgText -uppercase mb-2">Blog</h2>
+            <h2 className="text-center font-bold text-xl text-bgText uppercase mb-4">Blog</h2>
+
+            <h5 className="text-center font-bold text-sm text-primary uppercase mb-4">{blog.claim}</h5>
 
             <p className="text-justify text-bgText mb-4 mx-auto">
                 {blog.shortDescription}
             </p>
 
-            <Link href="#">
+            <Link href="/blog">
                 <a className="font-bold text-bgText pb-0.5 border-b-4 border-transparent hover:border-primary hover:text-primary">
                     read all posts
                     <IconContext.Provider value={{ className: "inline ml-2 text-xl sm:text-2xl" }}>

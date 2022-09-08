@@ -20,7 +20,7 @@ const Home: NextPage = () => {
       <Header />
       <div className={`
         ${showNavList ? 'hidden' : 'flex'}
-        md:flex w-full flex-1 flex-col items-center justify-center px-10 md:px-20 text-center`}>
+        md:flex w-full flex-1 flex-col items-center justify-start px-10 md:px-20 text-center`}>
         <AboutSection />
         <ExperienceSection />
         <ProjectsSection />

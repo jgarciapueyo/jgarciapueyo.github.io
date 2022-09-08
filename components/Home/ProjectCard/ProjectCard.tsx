@@ -18,7 +18,8 @@ const ProjectCard: React.FC<{project: any}> = ({ project }: any) => (
 
         <div className="mx-auto max-w-xs flex justify-evenly">
             {project.sourceCode !== undefined && (
-                <a className="flex font-semibold text-bgText pb-0.5 
+                <a href={project.sourceCode} target="_blank"
+                className="flex font-semibold text-bgText pb-0.5 
                               border-b-4 border-transparent 
                               hover:border-primary hover:text-primary">
                     <IconContext.Provider value={{className: "my-auto text-xl sm:text-2xl"}}>

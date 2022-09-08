@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
                 `}>
                 {about !== undefined && (
                     <li className="my-2 md:my-0 md:ml-10">
-                        <NavbarLink href="#about" onClick={toggleNavList}>
+                        <NavbarLink href="/#about" onClick={toggleNavList}>
                             About
                         </NavbarLink>
                     </li>
@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
 
                 {experience !== undefined && (
                     <li className="my-2 md:my-0 md:ml-10">
-                        <NavbarLink href="#experience" onClick={toggleNavList}>
+                        <NavbarLink href="/#experience" onClick={toggleNavList}>
                             Experience
                         </NavbarLink>
                     </li>
@@ -47,14 +47,14 @@ const Navbar: React.FC = () => {
 
                 {projects.length > 0 && (
                     <li className="my-2 md:my-0 md:ml-10">
-                        <NavbarLink href="#projects" onClick={toggleNavList}>
+                        <NavbarLink href="/#projects" onClick={toggleNavList}>
                             Projects
                         </NavbarLink>
                     </li>
                 )}
                 
                 <li className="my-2 md:my-0 md:ml-10">
-                    <NavbarLink href="#blog" onClick={toggleNavList}>
+                    <NavbarLink href="/blog" onClick={toggleNavList}>
                         Blog
                     </NavbarLink>
                 </li>
