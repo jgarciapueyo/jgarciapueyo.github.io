@@ -16,6 +16,7 @@ en: &DEFAULT_EN
   meta_label                 :
   tags_label                 : "Tags:"
   categories_label           : "Categories:"
+  keywords_label             : "Keywords:"
   date_label                 : "Published:"
   comments_label             : "Leave a Comment"
   comments_title             : "Comments"

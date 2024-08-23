@@ -7,7 +7,7 @@ date: 2023-08-29
 location: "Universidad de Zaragoza"
 grade: "9.7/10"
 authors:
-    - Ismael Tienda Hernando
+    - Tienda Hernando, Ismael
     - droyo
     - jgarciapueyo
 ---

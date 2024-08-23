@@ -1,0 +1,49 @@
+{% assign post = include.post %}
+{% assign types = "article,book,booklet,conference,inbook,incollection,inproceedings,manual,mastersthesis,misc,phdthesis,proceedings,techreport,unpublished" | split: "," %}
+{% assign type = post.bibtex | downcase | strip %}
+{% if types contains type %}
+
+    {% capture bib_title %}{{ post.title }}{% endcapture %}
+    {% capture bib_authors %}{% for _author in post.authors %}{% assign author = _author | split: '{' | first %}{% if site.data.authors contains author %}{{ site.data.authors[author].name }}{% else %}{{ author }}{% endif %}{% unless forloop.last %} and {% endunless %}{% endfor %}{% endcapture %}
+    {% capture bib_a %}{% raw %}{\\'a}{% endraw %}{% endcapture %}
+    {% capture bib_e %}{% raw %}{\\'e}{% endraw %}{% endcapture %}
+    {% capture bib_i %}{% raw %}{\\'i}{% endraw %}{% endcapture %}
+    {% capture bib_o %}{% raw %}{\\'o}{% endraw %}{% endcapture %}
+    {% capture bib_u %}{% raw %}{\\'u}{% endraw %}{% endcapture %}
+    {% capture bib_A %}{% raw %}{\\'A}{% endraw %}{% endcapture %}
+    {% capture bib_E %}{% raw %}{\\'E}{% endraw %}{% endcapture %}
+    {% capture bib_I %}{% raw %}{\\'I}{% endraw %}{% endcapture %}
+    {% capture bib_O %}{% raw %}{\\'O}{% endraw %}{% endcapture %}
+    {% capture bib_U %}{% raw %}{\\'U}{% endraw %}{% endcapture %}
+    {% capture bib_authors %}{{ bib_authors | replace: "á", bib_a }}{% endcapture %}
+    {% capture bib_authors %}{{ bib_authors | replace: "é", bib_e }}{% endcapture %}
+    {% capture bib_authors %}{{ bib_authors | replace: "í", bib_i }}{% endcapture %}
+    {% capture bib_authors %}{{ bib_authors | replace: "ó", bib_o }}{% endcapture %}
+    {% capture bib_authors %}{{ bib_authors | replace: "ú", bib_u }}{% endcapture %}
+    {% capture bib_authors %}{{ bib_authors | replace: "Á", bib_A }}{% endcapture %}
+    {% capture bib_authors %}{{ bib_authors | replace: "É", bib_E }}{% endcapture %}
+    {% capture bib_authors %}{{ bib_authors | replace: "Í", bib_I }}{% endcapture %}
+    {% capture bib_authors %}{{ bib_authors | replace: "Ó", bib_O }}{% endcapture %}
+    {% capture bib_authors %}{{ bib_authors | replace: "Ú", bib_U }}{% endcapture %}
+
+
+    {% assign year = post.date | date: "%Y" %}
+    {% capture bib_citekey %}{% include bibtex-citekey.html post=post %}{% endcapture %}
+    {% assign _begin = "{" %}
+    {% assign _end = "}" %}
+    @{{type}}{{ _begin }}{{ bib_citekey | strip }},
+        title = {{ _begin }}{{ bib_title }}{{ _end }},
+        author = {{ _begin }}{{ bib_authors }}{{ _end }},{% if type == "article" %}
+        journal = {{ _begin }}{{ post.venue }}{{ _end }},
+        volume = {{ _begin }}{{ post.volume }}{{ _end }},
+        number = {{ _begin }}{{ post.number }}{{ _end }},{% else %}
+        booktitle = {{ _begin }}{{ post.venue }}{{ _end }},{% endif %}{% if post.pages %}
+        pages = {{ _begin }}{{ post.pages | replace: "--", "-" | replace: "-", "--" }}{{ _end }},{% endif %}
+        year = {{ _begin }}{{year}}{{ _end }},{% if post.sn %}
+        issn = {{ _begin }}{{ post.sn }}{{ _end }},{% endif %}{% if post.doi %}
+        doi = {{ _begin }}{{ post.doi }}{{ _end }},{% endif %}{% if post.publisher %}
+        publisher = {{ _begin }}{{ post.publisher }}{{ _end }},{% endif %}
+    {{ _end }}
+{% else %}
+    {{ post.bibtex }}
+{% endif %}

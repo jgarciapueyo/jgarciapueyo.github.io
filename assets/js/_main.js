@@ -96,4 +96,104 @@ $(document).ready(function(){
     midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
   });
 
+  $(".highlighter-rouge").each(function(){
+    var $code = $(this).children("div").children("pre").children("code").text();
+
+    var $toolbar = null;
+    if ($(this).parent().is(":not([copy-to-clipboard='false'])")) {
+      if ($toolbar === null) {
+        $toolbar = $('<div class="highlight-toolbar"></div>');
+        $(this).prepend($toolbar);
+      }
+      var $btnCopy = $('<span class="copy-to-clipboard"></span>')
+      $toolbar.prepend($btnCopy);
+      const tooltip = new bootstrap.Tooltip($btnCopy, {
+          title: "Copy to clipboard",
+          placement: "top",
+          trigger: "hover"
+        })
+      $btnCopy.on("click", function(){  
+        navigator.clipboard.writeText($code);
+        tooltip.setContent({ '.tooltip-inner': 'Copied' });
+        $btnCopy.addClass("copied");
+        window.setTimeout(function(){
+          $btnCopy.unbind("hover");
+          tooltip.hide();
+          tooltip.setContent({ '.tooltip-inner': 'Copy to clipboard' });
+          $btnCopy.removeClass("copied");
+        }, 2000);
+      });
+    };
+
+    if ($(this).parent().is("[download]")) {
+      var filename = $(this).parent().attr("download");
+      if ($toolbar === null) {
+        $toolbar = $('<div class="highlight-toolbar"></div>');
+        $(this).prepend($toolbar);
+      }
+      var $btnDownload = $('<a class="download" href="data:text/plain;charset=utf-8,' + encodeURIComponent($code) + '" download="' + filename + '"></a>');
+      $toolbar.prepend($btnDownload);
+      new bootstrap.Tooltip($btnDownload, {
+        title: "Download",
+        placement: "top",
+        trigger: "hover"
+      })
+    };
+  });
+  
+  $(".back-to-top").on("click", function(){
+    window.scrollTo({ top: 0 });
+  });
+
+  $("#share-page").on("click", function( event ){
+    event.preventDefault();
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        url: location.href
+      }).catch(console.error);
+    } else {
+      const element = document.getElementById("share");
+      element.scrollIntoView();
+    }
+  });
+
+  if(location.hash != null && location.hash != ""){
+    $(location.hash + '.collapse').collapse('show');
+  }
+
 });
+
+
+window.onload = function() {
+  // Create a favicon with a circular mask
+  var icons = document.querySelectorAll("link[rel~='icon']");
+  var apple_touch_icons = document.querySelectorAll("link[rel~='apple-touch-icon']");
+  var favicons = Array.from(icons).concat(Array.from(apple_touch_icons));
+  if (favicons.length === 0) {
+      favicon = document.createElement('link');
+      favicon.rel = 'icon';
+      document.head.appendChild(favicon);
+      favicons = [favicon];
+  }
+
+  var canvas = document.createElement('canvas');
+  var context = canvas.getContext('2d');
+  
+  favicons.forEach(favicon => {
+    var img = document.createElement('img');
+    img.onload = () => {
+      faviconSize = img.width;
+      canvas.width = faviconSize;
+      canvas.height = faviconSize;
+      context.beginPath();
+      context.arc( faviconSize / 2, faviconSize / 2, faviconSize / 2, 0, 2*Math.PI);
+      context.closePath();
+      context.clip();
+      context.drawImage(img, 0, 0, faviconSize, faviconSize);
+      favicon.href = canvas.toDataURL('image/png');
+    };
+    img.crossOrigin = 'Anonymous';
+    img.src = favicon.href;
+  });
+};

@@ -1,10 +1,17 @@
-<!-- From: https://github.com/vmbatlle/vmbatlle.github.io/ -->
 {% include base_path %}
 
-{% if post.header.teaser %}
-  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
+{% if post.thumbnail.image %}
+  {% capture thumbnail %}{{ post.thumbnail.image }}{% endcapture %}
+{% elsif post.header.teaser %}
+  {% capture thumbnail %}{{ post.header.teaser }}{% endcapture %}
 {% else %}
-  {% assign teaser = site.teaser %}
+  {% assign thumbnail = site.teaser %}
+{% endif %}
+
+{% if post.thumbnail.background %}
+  {% capture thumbnail_background %}{{ post.thumbnail.background }}{% endcapture %}
+{% else %}
+  {% assign thumbnail_background = site.thumbnail_background %}
 {% endif %}
 
 {% if post.id %}
@@ -16,24 +23,24 @@
 <div class="{{ include.type | default: "list" }}__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
   <div class="row p-3">
-    {% if include.type == "grid" and teaser %}
+    {% if include.type == "grid" and thumbnail %}
       <div class="archive__item-teaser">
         <img src=
-          {% if teaser contains "://" %}
-            "{{ teaser }}"
+          {% if thumbnail contains "://" %}
+            "{{ thumbnail }}"
           {% else %}
-            "{{ teaser | prepend: "/images/" | prepend: base_path }}"
+            "{{ thumbnail | prepend: "/images/" | prepend: base_path }}"
           {% endif %}
           alt="Teaser for {{ title }}">
       </div>
     {% else %}
       <div class="d-none d-md-inline col-md-4">
-      {% if teaser %}
-        <img class="img-thumbnail p-2" src=
-        {% if teaser contains "://" %}
-          "{{ teaser }}"
+      {% if thumbnail %}
+        <img class="img-thumbnail p-2" style="background: {{ thumbnail_background | default: default }}" src=
+        {% if thumbnail contains "://" %}
+          "{{ thumbnail }}"
         {% else %}
-          "{{ teaser | prepend: "/images/" | prepend: base_path }}"
+          "{{ thumbnail | prepend: "/images/" | prepend: base_path }}"
         {% endif %}
         alt="">
       {% elsif post.videourl contains "://www.youtube.com" %}
@@ -47,18 +54,17 @@
 
     <div class="col-12 col-md-8">
     <b class="archive__item-title" itemprop="headline">
+      {% assign permalink = post.url | prepend: base_path %}
       {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}.</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      {% elsif post.doi %}
-        <a href="{{ post.doi }}" rel="permalink">{{ title }}.</a>
+        <a href="{{ post.link }}">{{ title }}.</a> <a href="{{ permalink }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
       {% else %}
-        <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}.</a>
+        <a href="{{ permalink }}" rel="permalink">{{ title }}.</a>
       {% endif %}
     </b>
 
     {% if post.authors %}
       <span class="archive__item-authors authors">
-      {% include authors-list.html %}
+      {% include authors-list.html post=post %}
       </span>
     {% endif %}
     
@@ -82,13 +88,6 @@
      -->
     <p class="archive__item-excerpt" itemprop="description"></p>
     <div id="collapse/parent/{{post.id}}">
-    {% if post.abstract %}
-      <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="collapse"
-        data-bs-target="#collapse/abstract/{{post.id}}" 
-        aria-expanded="false" aria-controls="collapse/abstract/{{post.id}}">
-        Abstract
-      </button>
-    {% endif %}
     {% if post.paperurl %}
       <a href=" {{ post.paperurl }} " class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="bi bi-unlock-fill text-success"></i> PDF</a>
     {% elsif post.doi or post.arxiv %}
@@ -96,52 +95,14 @@
         <a href="{{ post.doi }}" class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="bi bi-lock-fill text-danger"></i> PDF</a>
       {% endif %}
       {% if post.arxiv %}
-        <a href=" https://arxiv.org/abs/{{ post.arxiv }} " class="btn btn-outline-secondary btn-sm text-decoration-none">ArXiv</a>
+        <a href=" https://arxiv.org/abs/{{ post.arxiv }} " class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="ai ai-arxiv"></i> arXiv</a>
       {% endif %}
-    {% endif %}
-    {% if post.citation %}
-      <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" 
-        data-bs-target="#collapse/citation/{{post.id}}" data-bs-parent="#collapse/parent/{{post.id}}" 
-        aria-expanded="false" aria-controls="collapse/abstract/{{post.id}}">
-        <i class="bi bi-quote"></i> Cite
-      </button>
-    {% endif %}
-    {% if post.slidesurl %}
-      <a href="{{ post.slidesurl }}" class="btn btn-outline-secondary btn-sm text-decoration-none">Slides</a>
-    {% endif %}
-    {% if post.videourl %}
-      <a href="{{ post.videourl }}" class="btn btn-outline-secondary btn-sm text-decoration-none">Video</a>
     {% endif %}
     {% if post.codeurl %}
       <a href="{{ post.codeurl }}" class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="bi bi-github"></i> Code</a>
     {% endif %}
-    {% assign content_size = post.content | strip_html | strip | size %}
-    {% if post.website or content_size > 0 %}
-      {% if post.website %}
-        {% assign website = post.website %}
-      {% else %}
-        {% assign website = base_path | append: post.url %}
-      {% endif %}
-      <a href="{{ website }}" rel="permalink" class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="bi bi-globe2"></i> Website</a>
-    {% endif %}
-    {% if post.abstract %}
-      <div class="collapse" id="collapse/abstract/{{post.id}}" data-bs-parent="#collapse/parent/{{post.id}}">
-        <div class="card card-body">
-          <small>
-            {{ post.abstract | markdownify }}
-          </small>
-        </div>
-      </div>
-    {% endif %}
-    {% if post.citation %}
-      <div class="collapse" id="collapse/citation/{{post.id}}" data-bs-parent="#collapse/parent/{{post.id}}">
-        <div class="card card-body">
-          <small class="font-monospace" style="font-size: 0.75em;">
-            {{ post.citation | markdownify }}
-          </small>
-        </div>
-      </div>
-    {% endif %}
+    {% assign project_page = post.website | default: post.link | default: permalink %}
+    <a href="{{ project_page }}" rel="permalink" class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="bi bi-globe2"></i> Project page</a>
     </div>
   </div>
   </div>
