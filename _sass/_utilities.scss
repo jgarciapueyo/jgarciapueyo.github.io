@@ -1,5 +1,5 @@
 /* ==========================================================================
-   UTILITY CLASSES
+   UTILITY CLASSES Modified according to: https://github.com/vmbatlle/vmbatlle.github.io/
    ========================================================================== */
 
 /*
@@ -189,8 +189,15 @@ body:hover .visually-hidden button {
 
 /* Adjust this setting to control the space between an icon and text in the sidebar */
 .icon-pad-right {
-  padding-right: 0.5em;
-  margin-right: 0.5em;
+  padding-right: 0.5em; margin-right: 0.5em;
+}
+
+/* authors*/
+.authors {
+  .ai-orcid,
+  .ai-orcid-square {
+    color: $orcid-color;
+  }
 }
 
 /* social icons*/
@@ -315,6 +322,11 @@ body:hover .visually-hidden button {
   .fa-xing,
   .fa-xing-square {
     color: $xing-color;
+  }
+
+  .fa-google-scholar,
+  .fa-google-scholar-square {
+    color: $google-scholar-color;
   }
 }
 

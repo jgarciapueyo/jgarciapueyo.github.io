@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SINGLE PAGE/POST
+   SINGLE PAGE/POST Modified according to: https://github.com/vmbatlle/vmbatlle.github.io/
    ========================================================================== */
 
 #main {
@@ -72,7 +72,7 @@
     }
   }
 
-  a {
+  a:not(.btn) {
     text-decoration: underline;
 
     &:hover {
