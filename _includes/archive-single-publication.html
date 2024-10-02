@@ -20,91 +20,53 @@
   {% assign title = post.title | strip %}
 {% endif %}
 
+{% assign project_page = post.website | default: post.link | default: permalink %}
+
 <div class="{{ include.type | default: "list" }}__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-  <div class="row p-3">
-    {% if include.type == "grid" and thumbnail %}
-      <div class="archive__item-teaser">
-        <img src=
+  <article class="archive__item card my-2 p-3" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="row">
+        <div class="d-md-inline col-md-4 d-none">
+        {% if thumbnail %}
+          <img class="img-thumbnail p-2" style="background: {{ thumbnail_background | default: default }}" src=
           {% if thumbnail contains "://" %}
             "{{ thumbnail }}"
           {% else %}
             "{{ thumbnail | prepend: "/images/" | prepend: base_path }}"
           {% endif %}
-          alt="Teaser for {{ title }}">
-      </div>
-    {% else %}
-      <div class="d-none d-md-inline col-md-4">
-      {% if thumbnail %}
-        <img class="img-thumbnail p-2" style="background: {{ thumbnail_background | default: default }}" src=
-        {% if thumbnail contains "://" %}
-          "{{ thumbnail }}"
-        {% else %}
-          "{{ thumbnail | prepend: "/images/" | prepend: base_path }}"
+          alt="">
+        {% elsif post.videourl contains "://www.youtube.com" %}
+          {% assign youtube_code = post.videourl | split: "v=" | last | split: "?" | first %}
+          <img class="img-thumbnail p-2" src="https://img.youtube.com/vi/{{ youtube_code }}/mqdefault.jpg" alt="Video thumbnail for {{ title }}">
         {% endif %}
-        alt="">
-      {% elsif post.videourl contains "://www.youtube.com" %}
-        {% assign youtube_code = post.videourl | split: "v=" | last | split: "?" | first %}
-        <img class="img-thumbnail" src="https://img.youtube.com/vi/{{ youtube_code }}/mqdefault.jpg" alt="Video thumbnail for {{ title }}">
-      {% else %}
-        
-      {% endif %}
+        </div>
+
+      <div class="col-md-8 col-12">
+        <p class="card-title" itemprop="headline">{{ title }}</p>
+        <p class="card-subtitle">
+          {% include authors-list.html post=post %}
+        </p>
+        <p class="card-text text-muted">In <i>{{ post.venue | replace: "(", "(<b>" | replace: ")", "</b>)"}}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }}.</p>
+        <div id="collapse/parent/{{post.id}}" class="d-flex justify-content-between align-items-center">
+          <div class="bt-group">
+            {% if post.paperurl %}
+              <a href="{{ post.paperurl }} " class="btn btn-sm btn-outline-secondary text-decoration-none">Article</a>
+            {% elsif post.pdfurl %}
+              <a href="{{ post.paperurl }} " class="btn btn-sm btn-outline-secondary text-decoration-none">PDF</a>
+            {% elsif post.doi %}
+              <a href="{{ post.doi }}" class="btn btn-outline-secondary btn-sm text-decoration-none">PDF</a>
+            {% endif %}
+            {% if post.codeurl %}
+              <a href="{{ post.codeurl }}" class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="bi bi-github"></i>Code
+              </a>
+            {% endif %}
+            
+            <a href="{{ project_page }}" rel="permalink" class="btn btn-outline-secondary btn-sm text-decoration-none">Project page</a>
+
+            <a href="{{ post.bibtex | prepend: "/files/" }}" target="_blank" class="btn btn-outline-secondary btn-sm text-decoration-none">Bibtex</a>
+          </div>
+          <small class="text-info ml-2">{{ post.type }}</small>
+        </div>
       </div>
-    {% endif %}
-
-    <div class="col-12 col-md-8">
-    <b class="archive__item-title" itemprop="headline">
-      {% assign permalink = post.url | prepend: base_path %}
-      {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}.</a> <a href="{{ permalink }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      {% else %}
-        <a href="{{ permalink }}" rel="permalink">{{ title }}.</a>
-      {% endif %}
-    </b>
-
-    {% if post.authors %}
-      <span class="archive__item-authors authors">
-      {% include authors-list.html post=post %}
-      </span>
-    {% endif %}
-    
-    {% if post.read_time %}
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
-    {% endif %}
-
-        {% if post.collection == 'teaching' %}
-          <p> {{ post.type }}, <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
-        {% elsif post.collection == 'publications' %}
-          <span>In <i>{{ post.venue | replace: "(", "(<b>" | replace: ")", "</b>)"}}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }}. </span>
-        {% elsif post.date %}
-         <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
-        {% endif %}
-    <!-- 
-    {% if post.excerpt and site.read_more != 'enabled' %}
-    <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify }}</p>
-    {% elsif post.excerpt and site.read_more == 'enabled' %}
-    <p class="archive__item-excerpt" itemprop="description"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
-    {% endif %}
-     -->
-    <p class="archive__item-excerpt" itemprop="description"></p>
-    <div id="collapse/parent/{{post.id}}">
-    {% if post.paperurl %}
-      <a href=" {{ post.paperurl }} " class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="bi bi-unlock-fill text-success"></i> PDF</a>
-    {% elsif post.doi or post.arxiv %}
-      {% if post.doi %}
-        <a href="{{ post.doi }}" class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="bi bi-lock-fill text-danger"></i> PDF</a>
-      {% endif %}
-      {% if post.arxiv %}
-        <a href=" https://arxiv.org/abs/{{ post.arxiv }} " class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="ai ai-arxiv"></i> arXiv</a>
-      {% endif %}
-    {% endif %}
-    {% if post.codeurl %}
-      <a href="{{ post.codeurl }}" class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="bi bi-github"></i> Code</a>
-    {% endif %}
-    {% assign project_page = post.website | default: post.link | default: permalink %}
-    <a href="{{ project_page }}" rel="permalink" class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="bi bi-globe2"></i> Project page</a>
     </div>
-  </div>
-  </div>
   </article>
 </div>
