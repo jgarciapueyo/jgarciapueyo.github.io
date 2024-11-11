@@ -1,7 +1,7 @@
 # Authors
 
 jgarciapueyo:
-  name         : "Garcia-Pueyo, Jorge"
+  name         : "Garcia-Pueyo,Jorge"
   uri          : "https://jgarciapueyo.github.io"
   email        :
   bio          :
@@ -39,3 +39,33 @@ jarabo:
   twitter      : ""
   orcid        : ""
   googlescholar: "pXKBhbkAAAAJ&hl=en"
+
+scartiel:
+  name         : "Cartiel, Sergio"
+  uri          : ""
+  email        :
+  bio          :
+  avatar       :
+  twitter      : ""
+  orcid        : ""
+  googlescholar: ""
+
+ebacher:
+  name         : "Bacher, Emmanuel"
+  uri          : ""
+  email        :
+  bio          :
+  avatar       :
+  twitter      : ""
+  orcid        : ""
+  googlescholar: "u0zlQOgAAAAJ&hl=en"
+
+mlaurenzis:
+  name         : "Laurenzis, Martin"
+  uri          : ""
+  email        :
+  bio          :
+  avatar       :
+  twitter      : ""
+  orcid        : ""
+  googlescholar: "c96yC1QAAAAJ&hl=en"

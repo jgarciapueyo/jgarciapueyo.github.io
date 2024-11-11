@@ -8,14 +8,14 @@
 {% else %}
   {% assign authors = post.authors %}
 {% endif %}
-{% for author_id in authors %}
+{%- for author_id in authors -%}
   {% assign remaining_authors = num_authors | minus: forloop.index %}
   {% if remaining_authors > 1 %}
-    {% assign appendix = ",-" %}
+    {% assign appendix = ", " %}
   {% elsif remaining_authors == 1 %}
-    {% assign appendix = "-and-" %}
+    {% assign appendix = " and " %}
   {% elsif num_authors > 1 %}
     {% assign appendix = "." %}
   {% endif %}
   {% include author-badge.html author=author_id %}{{ appendix }}
-{% endfor %}
+{%- endfor -%}

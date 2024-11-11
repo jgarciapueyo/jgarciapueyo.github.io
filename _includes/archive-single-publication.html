@@ -22,20 +22,20 @@
 
 {% assign project_page = post.website | default: post.link | default: permalink %}
 
-<div class="{{ include.type | default: "list" }}__item">
-  <article class="card d-flex flex-row" itemscope itemtype="http://schema.org/CreativeWork">
-        <div class="d-md-inline col-md-4 d-none my-auto">
-          <img style="background: {{ thumbnail_background | default: default }}" src=
-          {% if thumbnail contains "://" %}
-            "{{ thumbnail }}"
-          {% else %}
-            "{{ thumbnail | prepend: "/images/" | prepend: base_path }}"
-          {% endif %}
-          alt="">
-        </div>
+<div class="{{ include.type | default: "list" }}__item mb-2">
+  <article class="card border-0 d-flex flex-row" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="d-md-inline col-md-4 d-none my-auto">
+        <img class="rounded" style="background: {{ thumbnail_background | default: default }}" src=
+        {% if thumbnail contains "://" %}
+          "{{ thumbnail }}"
+        {% else %}
+          "{{ thumbnail | prepend: "/images/" | prepend: base_path }}"
+        {% endif %}
+        alt="">
+      </div>
 
       <div class="card-body col-md-8 col-12">
-        <p>{{ title }}</p>
+        <p><a href="{{ post.permalink }}">{{ title }}</a></p>
         <p>
           {% include authors-list.html post=post %}
         </p>
@@ -43,7 +43,7 @@
         <div id="collapse/parent/{{post.id}}" class="d-flex justify-content-between align-items-center">
           <div class="bt-group">
             {% if post.paperurl %}
-              <a href="{{ post.paperurl }} " class="btn btn-sm btn-outline-secondary text-decoration-none">Article</a>
+              <a href="{{ post.paperurl }} " class="btn btn-sm btn-outline-secondary text-decoration-none">PDF</a>
             {% elsif post.pdfurl %}
               <a href="{{ post.paperurl }} " class="btn btn-sm btn-outline-secondary text-decoration-none">PDF</a>
             {% elsif post.doi %}
@@ -53,9 +53,9 @@
               <a href="{{ post.codeurl }}" class="btn btn-outline-secondary btn-sm text-decoration-none"><i class="bi bi-github"></i>Code
               </a>
             {% endif %}
-            
-            <a href="{{ project_page }}" rel="permalink" class="btn btn-outline-secondary btn-sm text-decoration-none">Project page</a>
 
+            <a href="{{ project_page }}" rel="permalink" class="btn btn-outline-secondary btn-sm text-decoration-none">Project page</a>
+            
             <a href="{{ post.bibtex | prepend: "/files/" }}" target="_blank" class="btn btn-outline-secondary btn-sm text-decoration-none">Bibtex</a>
           </div>
           <small class="text-info ml-2">{{ post.type }}</small>

@@ -14,12 +14,12 @@ notes:
     - "{1} Universidad de Zaragoza"
     - "{2} École Polytechnique Fédérale de Laussane (EPFL)"
 header:
-    teaser: teaser-nlos-transient-rendering.png
+    teaser: teaser-royo2024mitransient.png
 abstract:
     "Our work fixes these issues by building a rendering tool that can simulate different sorts of time-resolved sensing devices (including time-gated and transient cameras), with easy-to-extend modules written in Python, which leverages the state-of-the-art technology of Mitsuba 3. Specifically, we can  simulate the interactions of light with complex materials and participating media, run in both CPU and GPU by using vectorized JIT compiled code, compute ray tracing queries with optimized acceleration structures, and compute derivatives including the temporal domain."
 keywords:
     - Transient Rendering
     - Light Transport
     - Non-line-of-sight imaging
-bibtex: poster
+bibtex: royo2024mitransient.bib
 ---

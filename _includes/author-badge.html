@@ -5,25 +5,24 @@
     {% assign author = include.author %}
     {% assign notes = '' %}
 {% endif %}
-
 <span>
-{% if site.data.authors contains author %}
+{%- if site.data.authors contains author -%}
     {% assign author = site.data.authors[author] %}
     {% assign name = author.name | split: "," %}
     {% assign last_name = name | first %}
     {% assign first_name = name | last %}
     {% assign name = first_name | append: " " | append: last_name %}
-    {% if author.uri %}
-        {% if name contains 'Jorge Garcia-Pueyo' %}
-            <a class="text-decoration-underline" href="{{ author.uri }}">{{ name }}</a>{% if include.show_notes %}<sup>{{ notes }}</sup>{% endif %}
-        {% else %}
-            <a class="text-decoration-none" href="{{ author.uri }}">{{ name }}</a>{% if include.show_notes %}<sup>{{ notes }}</sup>{% endif %}
-        {% endif %}
-    {% else %}
+    {%- if author.uri -%}
+        {%- if name contains 'Jorge Garcia-Pueyo' -%}
+            <a class="text-decoration-underline" href="{{ author.uri }}">{{- name -}}</a>{% if include.show_notes %}<sup>{{ notes }}</sup>{% endif %}
+        {%- else -%}
+            <a class="text-decoration-none" href="{{ author.uri }}">{{- name -}}</a>{% if include.show_notes %}<sup>{{ notes }}</sup>{% endif %}
+        {%- endif -%}
+    {%- else -%}
         {{ name }}{% if include.show_notes %}<sup>{{ notes }}</sup>{% endif %}
-    {% endif %}
-{% else %}
+    {%- endif -%}
+{%- else -%}
     {% assign name = author | split: ", " %}
     {{ name | last }} {{ name | first }}{% if include.show_notes %}<sup>{{ notes }}</sup>{% endif %}
-{% endif %}
+{%- endif -%}
 </span>
