@@ -23,29 +23,23 @@
 {% assign project_page = post.website | default: post.link | default: permalink %}
 
 <div class="{{ include.type | default: "list" }}__item">
-  <article class="archive__item card my-2 p-3" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="row">
-        <div class="d-md-inline col-md-4 d-none">
-        {% if thumbnail %}
-          <img class="img-thumbnail p-2" style="background: {{ thumbnail_background | default: default }}" src=
+  <article class="card d-flex flex-row" itemscope itemtype="http://schema.org/CreativeWork">
+        <div class="d-md-inline col-md-4 d-none my-auto">
+          <img style="background: {{ thumbnail_background | default: default }}" src=
           {% if thumbnail contains "://" %}
             "{{ thumbnail }}"
           {% else %}
             "{{ thumbnail | prepend: "/images/" | prepend: base_path }}"
           {% endif %}
           alt="">
-        {% elsif post.videourl contains "://www.youtube.com" %}
-          {% assign youtube_code = post.videourl | split: "v=" | last | split: "?" | first %}
-          <img class="img-thumbnail p-2" src="https://img.youtube.com/vi/{{ youtube_code }}/mqdefault.jpg" alt="Video thumbnail for {{ title }}">
-        {% endif %}
         </div>
 
-      <div class="col-md-8 col-12">
-        <p class="card-title" itemprop="headline">{{ title }}</p>
-        <p class="card-subtitle">
+      <div class="card-body col-md-8 col-12">
+        <p>{{ title }}</p>
+        <p>
           {% include authors-list.html post=post %}
         </p>
-        <p class="card-text text-muted">In <i>{{ post.venue | replace: "(", "(<b>" | replace: ")", "</b>)"}}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }}.</p>
+        <p class="text-muted">In <i>{{ post.venue | replace: "(", "(<b>" | replace: ")", "</b>)"}}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }}.</p>
         <div id="collapse/parent/{{post.id}}" class="d-flex justify-content-between align-items-center">
           <div class="bt-group">
             {% if post.paperurl %}
@@ -67,6 +61,5 @@
           <small class="text-info ml-2">{{ post.type }}</small>
         </div>
       </div>
-    </div>
   </article>
 </div>

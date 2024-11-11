@@ -21,7 +21,7 @@ repository               : "jgarciapueyo/jgarciapueyo.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "profile_jorge.png"
   name             : "Jorge Garcia-Pueyo"
   pronouns         : # example: "she/her"  
   bio              : "PhD candidate in Computer Graphics/Computational Imaging at <a href='https://graphics.unizar.es'>Graphics and Imaging Lab</a>"
