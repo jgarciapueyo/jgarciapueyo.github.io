@@ -80,6 +80,7 @@ jobs:
       - name: Build the site
         run: |
           hugo \
+            -s ./blog_src \
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/" \
