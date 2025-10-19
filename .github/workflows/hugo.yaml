@@ -80,7 +80,6 @@ jobs:
       - name: Build the site
         run: |
           hugo \
-            -s ./blog_src \
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/" \
@@ -94,7 +93,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./blog_src/public
+          path: ./public
   deploy:
     environment:
       name: github-pages
