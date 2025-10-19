@@ -1,7 +1,7 @@
-baseURL = 'https://jgarciapueyo.github.io/'
+baseURL = 'https://jgarciapueyo.github.io/blog/'
 languageCode = 'en-us'
 title = 'Jorge García-Pueyo Blog'
-publishDir = "public/blog"
+publishDir = "public/blog/"
 
 [module]
   [[module.imports]]
